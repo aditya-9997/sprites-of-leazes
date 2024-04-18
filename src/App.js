@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import LandingPage from './components/LandingPage';
+import Tutorial from './components/Tutorial';
+import MainGameView from './components/MainGameView';
+import QRCodeContent from './components/QRCodeContent';
+import CollaborativeView from './components/CollaborativeView';
+import ProgressAndAchievements from './components/ProgressAndAchievements';
 
-function App() {
+const App = () => {
+  const qrCodeContent = {
+    type: 'narrative',
+    message: 'A Leazes Lighter has left a message for you...',
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/tutorial" element={<Tutorial />} />
+        <Route path="/game" element={<MainGameView qrCodeContent={qrCodeContent} />} />
+        <Route path="/qr-code" element={<QRCodeContent />} />
+        <Route path="/collaborative" element={<CollaborativeView />} />
+        <Route path="/progress" element={<ProgressAndAchievements />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
